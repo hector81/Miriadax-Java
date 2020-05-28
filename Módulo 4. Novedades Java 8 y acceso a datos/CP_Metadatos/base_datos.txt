@@ -1,0 +1,102 @@
+CREATE DATABASE Curso_Java_Miriadax;
+
+USE Curso_Java_Miriadax;
+
+CREATE TABLE Categorias(
+  idCategoria int(11) AUTO_INCREMENT NOT NULL,
+  nombreCategoria varchar(100) NOT NULL,
+  descripcion_categoria varchar(200) DEFAULT NULL,
+  CONSTRAINT UC_Categorias UNIQUE (nombreCategoria),
+  CONSTRAINT UC_Categorias_Id UNIQUE (idCategoria)
+);
+
+ALTER TABLE Categorias
+  ADD PRIMARY KEY (idCategoria);
+
+INSERT INTO Categorias (nombreCategoria, descripcion_categoria) VALUES
+('Historia', 'Libros relacionados con geografías,biografías e historia'),
+('Literatura', 'Libros relacionados con literatura española y extranjera'),
+('Bellas artes', 'Libros relacionados con bellas artes'),
+('Deportes y espectáculos', 'Libros relacionados con deportes y espectáculos');
+
+
+CREATE TABLE SubCategorias (
+  idSubCategoria int(11) AUTO_INCREMENT NOT NULL,
+  nombreSubCategoria varchar(100) NOT NULL,
+  descripcion_subcategoria varchar(200) DEFAULT NULL,
+  idCategoria int(11) NOT NULL,
+  CONSTRAINT UC_SubCategorias UNIQUE (nombreSubCategoria),
+  CONSTRAINT UC_SubCategorias_Id UNIQUE (idSubcategoria),
+  CONSTRAINT Fk_id_Categoria FOREIGN KEY (idCategoria) REFERENCES Categorias(idCategoria) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE SubCategorias
+  ADD PRIMARY KEY (idSubCategoria);
+
+INSERT INTO SubCategorias (nombreSubCategoria, descripcion_subcategoria, idCategoria) VALUES
+('Prehistoria', 'Libros prehistoria', 1),
+('Historia antigua', 'Libros historia antigua', 1),
+('Historia medieval', 'Libros historia medieval', 1),
+('Historia renacentista', 'Libros historia renacentista', 1),
+('Literatura en lengua alemana', 'Libros de Literatura en lengua alemana', 2),
+('Literatura en lengua catalana', 'Libros de Literatura en lengua catalana', 2),
+('Literatura en lengua francesa', 'Libros de Literatura en lengua francesa', 2),
+('Literatura en lengua gallega', 'Libros de Literatura en lengua gallega', 2),
+('Literatura en lengua inglesa', 'Libros de Literatura en lengua inglesa', 2),
+('Literatura en lengua vasca', 'Libros de Literatura en lengua vasca', 2),
+('Literatura en otras lenguas del estado español', 'Libros de Literatura en otras lenguas del estado español', 2),
+('Historia del Arte', 'Libros de Historia del Arte', 3),
+('Pintura y escultura', 'Libros de Pintura y escultura', 3),
+('Arquitectura y urbanismo', 'Libros de Arquitectura y urbanismo', 3),
+('Moda y diseño', 'Libros de Moda y diseño', 3),
+('Deportes', 'Libros de deportes', 4),
+('Espectáculos', 'Libros de espectáculos', 4);
+
+
+
+CREATE TABLE Productos (
+  idProducto int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  idSubCategoria int(11) NOT NULL,
+  titulo varchar(200) NOT NULL,
+  pvp decimal(15,4) NOT NULL,
+  descripcion_producto varchar(500) DEFAULT NULL,
+  CONSTRAINT FK_id_SubCategorias FOREIGN KEY (idSubCategoria) REFERENCES SubCategorias(idSubCategoria) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+INSERT INTO Productos (idSubCategoria, titulo, pvp, descripcion_producto) VALUES
+(16, 'Manual de estiramientos deportivos : 311 estiramientos para 41 deportes', 5.89, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(16, 'Fútbol : las reglas del juego para todos', 6.57, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(17, 'El gran espectáculo de la cafetera Pete', 10.59, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(15, 'Tejido, forma y patronaje plano', 14.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(15, 'Dibujo de moda creativo : guía completa de estilos de diseño e ilustración', 14.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(14, 'Urbanismo y austeridad', 11.59, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(14, 'El Barroco : arquitectura y urbanismo', 20.78, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(14, 'Arquitectura y urbanismo en los asentamientos fenicios de España y el Extremo Occidente', 22.59, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(13, 'La pintura de paisaje en Álava', 17.59, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(13, 'Imaginería románica en La Rioja : tallas de Cristo crucificado y de la Virgen con el Niño', 23.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(12, 'El arte del Renacimiento español', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(12, 'Arte e historia en la Edad Media', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(11, 'Oligarquía y caciquismo : Antología', 15.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(10, 'Días de Nevada', 9.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(9, 'Cuentos de Navidad', 31.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(9, 'El secreto de Raffles Haw', 31.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(8, 'El caballero de las botas azules', 10.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(8, 'En las orillas del Sar', 11.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(7, 'Los tres mosqueteros', 9.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(6, 'El cel no és transparent', 11.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(6, 'Un camí de Damasc', 11.01, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(5, 'El tambor de hojalata', 22.50, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(4, 'Casadas, monjas, rameras y brujas : la olvidada historia de la mujer española en el Renacimiento', 12.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(4, 'La imprenta y la literatura espiritual castellana en la España del Renacimiento, 1470-1560', 13.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(4, 'Vivir la historia de la Italia del Renacimiento : Italia, 1400-1550', 14.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(4, 'Historia del arquitectura del Renacimiento : la arquitectura clásica del siglo XV al siglo XVIII', 15.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(3, 'Transiciones de la Antigüedad al feudalismo', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(3, 'Breve historia de los Merovingios los orígenes de la Francia medieval', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(3, 'Los campesinos en la sociedad medieval', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(2, 'La antigua Grecia : historia política, social y cultural', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(2, 'Historia de España Antigua', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(2, 'Historia de la Roma antigua', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(1, 'La prehistoria del hombre : del origen al neolítico', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(1, 'La prehistoria explicada a los jóvenes', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.'),
+(1, 'Las sociedades paleolíticas de Europa', 20.00, 'Lorem ipsum dolor sit amet consectetur adipiscing elit.');

@@ -1,0 +1,36 @@
+CREATE DATABASE Curso_Java_Miriadax;
+
+USE Curso_Java_Miriadax;
+
+CREATE TABLE Producto (
+  idProducto int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  nombre varchar(200) NOT NULL,
+  precio decimal(15,4) NOT NULL
+);
+
+
+INSERT INTO Producto (nombre, precio) VALUES
+('Manual de estiramientos deportivos : 311 estiramientos para 41 deportes', 5.89),
+('Fútbol : las reglas del juego para todos', 6.57),
+('El gran espectáculo de la cafetera Pete', 10.59),
+('Tejido, forma y patronaje plano', 14.00),
+('Dibujo de moda creativo : guía completa de estilos de diseño e ilustración', 14.00),
+('Urbanismo y austeridad', 11.59),
+('El Barroco : arquitectura y urbanismo', 20.78),
+('Arquitectura y urbanismo en los asentamientos fenicios de España y el Extremo Occidente', 22.59),
+('La pintura de paisaje en Álava', 17.59),
+('Imaginería románica en La Rioja : tallas de Cristo crucificado y de la Virgen con el Niño', 23.00),
+('El arte del Renacimiento español', 20.00),
+('Arte e historia en la Edad Media', 20.00),
+('Oligarquía y caciquismo : Antología', 15.00),
+('Días de Nevada', 9.00),
+('Cuentos de Navidad', 31.00),
+('El secreto de Raffles Haw', 31.00),
+('El caballero de las botas azules', 10.00),
+('En las orillas del Sar', 11.00),
+('Los tres mosqueteros', 9.00),
+('El cel no és transparent', 11.00),
+('Un camí de Damasc', 11.01),
+('El tambor de hojalata', 22.50),
+('Casadas, monjas, rameras y brujas : la olvidada historia de la mujer española en el Renacimiento', 12.00);
+
